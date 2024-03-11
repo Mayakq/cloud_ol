@@ -5,7 +5,7 @@ use crate::cfg::Config;
 
 #[derive(Clone)]
 pub struct AppState {
-    db_connect: Pool<Postgres>,
+    pub pool: Pool<Postgres>,
 }
 
 impl AppState {
@@ -14,7 +14,7 @@ impl AppState {
         match pool {
             Ok(pool) => {
                 AppState {
-                    db_connect: pool
+                    pool
                 }
             }
             Err(err) => {
