@@ -1,1 +1,2 @@
-mod registration;
+pub mod registration;
+pub mod login;
