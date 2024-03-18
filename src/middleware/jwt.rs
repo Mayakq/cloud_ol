@@ -17,7 +17,7 @@ impl FromRequest for JwtMiddleware {
     fn from_request(req: &HttpRequest, payload: &mut Payload) -> Self::Future {
         let data = req.app_data::<web::Data<AppState>>().unwrap();
         let token = req
-            .cookie("token")
+            .   cookie("token")
             .map(|c| c.value().to_string())
             .or_else(|| {
                 req.headers()
