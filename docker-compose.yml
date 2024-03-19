@@ -1,13 +1,17 @@
 version: '3'
+name: cloud_ol
 services:
   postgres:
     image: postgres:latest
     container_name: cloud
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - '6500:5432'
     volumes:
       - postgresDB:/data/postgres
     env_file:
-      - ../cloud_ol/.env
+      - ./.env
 volumes:
   postgresDB:

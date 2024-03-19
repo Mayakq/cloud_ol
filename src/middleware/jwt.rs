@@ -29,7 +29,7 @@ impl FromRequest for JwtMiddleware {
         }
         let claims = match decode::<TokenClaims>(
             &token.unwrap(),
-            &DecodingKey::from_secret(std::env::var("JWT_SECRET").unwrap().as_bytes()),
+            &DecodingKey::from_secret("secrent".to_string().as_ref()),
             &Validation::default(),
         ) {
             Ok(c) => c.claims,

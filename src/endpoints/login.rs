@@ -1,15 +1,15 @@
-use actix_web::{get, web::{self, Json}, Responder, HttpResponse};
+use actix_web::{post, web::{self, Json}, Responder, HttpResponse};
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
-use argon2::password_hash::PasswordHashString;
+
 use chrono::{Duration, Utc};
 use jsonwebtoken::{EncodingKey, Header};
 use serde_json::json;
 use tracing::info;
 
-use crate::{handlers::response::CustomResponse, models::login::Body, Data};
+use crate::{models::login::Body, Data};
 use crate::claims::TokenClaims;
 
-#[get("log/")]
+#[post("log/")]
 pub async fn login(data: Data, body: web::Json::<Body>) -> impl Responder {
     let query = sqlx::query!("select id, password from users where login = $1", body.name)
         .fetch_all(&data.pool).await;

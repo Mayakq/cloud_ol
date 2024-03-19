@@ -7,7 +7,7 @@ pub struct Config {
 impl Config {
     pub fn init() -> Config {
         dotenv().ok();
-        let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
+        let database_url = "postgresql://postgres:postgres@localhost:6500/postgres?schema=public".to_string();
         return Config {
             database_url,
         };
