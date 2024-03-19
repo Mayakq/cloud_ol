@@ -5,7 +5,7 @@ use tracing::info;
 use tracing::log::Level;
 use tracing_actix_web::TracingLogger;
 use crate::{database::AppState, endpoints::registration::registration};
-use crate::endpoints::names_public_albums::{ get_names_public_alb};
+use crate::endpoints::load_photo::load_photo;
 use crate::endpoints::login::login;
 use crate::endpoints::names_private_albums::get_names_private_alb;
 
@@ -41,7 +41,7 @@ pub fn config(conf: &mut web::ServiceConfig) {
         .service(healthy)
         .service(registration)
         .service(login)
-        .service(get_names_public_alb)
+        .service(load_photo)
         .service(get_names_private_alb);
 
     conf.service(scope);

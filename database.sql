@@ -16,8 +16,6 @@ create table if not exists "albums"
     public bool default false,
     path varchar(8192) not null ,
     owner uuid not null,
-    joint_author uuid default null,
-    users_with_access uuid default null
 );
 create table if not exists "photo"
 (
@@ -25,8 +23,6 @@ create table if not exists "photo"
     public bool default false,
     path varchar(8192) not null ,
     owner uuid not null,
-    joint_author uuid default null,
-    users_with_access uuid default null,
     extension varchar(256) not null,
     album uuid
 

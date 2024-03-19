@@ -4,5 +4,4 @@ pub mod logout;
 pub mod paths_public_photo;
 pub mod get_photo;
 pub mod names_private_albums;
-pub mod names_public_albums;
-mod load_photo;
+pub mod load_photo;
