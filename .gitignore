@@ -1,3 +1,8 @@
 /target
 .idea
 Cargo.lock
+SiteOlipm/node_modules
+SiteOlipm/auth/node_modules
+SiteOlipm/error/err/node_modules
+SiteOlipm/Reg/node_modules
+SiteOlipm/upload_img/node_modules
