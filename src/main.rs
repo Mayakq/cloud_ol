@@ -21,7 +21,7 @@ pub type Data = web::Data<AppState>;
 async fn main() {
     let cfg = cfg::Config::init();
     let app_state = Data::new(AppState::init(&cfg).await);
-    env_logger::init_from_env(Env::default().default_filter_or(Level::Trace.as_str()));
+    env_logger::init_from_env(Env::default().default_filter_or(Level::Info.as_str()));
     info!("Application started ♥");
     let _ = HttpServer::new(move || {
         App::new()
@@ -38,15 +38,10 @@ async fn main() {
 }
 pub fn config(conf: &mut web::ServiceConfig) {
     let scope = web::scope("/api")
-        .service(healthy)
         .service(registration)
         .service(login)
         .service(load_photo)
         .service(get_names_private_alb);
 
     conf.service(scope);
-}
-#[get("/hello")]
-async fn healthy(info: middleware::jwt::JwtMiddleware) -> impl Responder {
-    return info.user.to_string()
 }

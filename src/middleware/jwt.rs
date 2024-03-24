@@ -14,8 +14,8 @@ impl FromRequest for JwtMiddleware {
     type Error = actix_web::Error;
     type Future = Ready<Result<Self, Self::Error>>;
 
-    fn from_request(req: &HttpRequest, payload: &mut Payload) -> Self::Future {
-        let data = req.app_data::<web::Data<AppState>>().unwrap();
+    fn from_request(req: &HttpRequest, _payload: &mut Payload) -> Self::Future {
+        req.app_data::<web::Data<AppState>>().unwrap();
         let token = req
             .   cookie("token")
             .map(|c| c.value().to_string())
@@ -29,7 +29,7 @@ impl FromRequest for JwtMiddleware {
         }
         let claims = match decode::<TokenClaims>(
             &token.unwrap(),
-            &DecodingKey::from_secret("secrent".to_string().as_ref()),
+            &DecodingKey::from_secret("secret".to_string().as_ref()),
             &Validation::default(),
         ) {
             Ok(c) => c.claims,
